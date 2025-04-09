@@ -43,20 +43,33 @@ export const GET_ARTICLES = gql`
   }
 `;
 
-export const GET_BOOKMARKED_ARTICLES = gql`
+export const GET_BOOKMARKS = gql`
   query GetBookmarkedArticles {
     bookmarks(order_by: { created_at: desc }) {
       id
-      article {
-        id
-        title
-        summary
-        source
-        url
-        image_url
-        published_at
-        sentiment_label
-      }
+      title
+      summary
+      source
+      url
+      image_url
+      published_at
+      sentiment_label
+      created_at
     }
   }
 `; 
+
+// export const GET_BOOKMARKS = gql`
+//   query GetBookmarks($userId: uuid!) {
+//     bookmarks{
+//       id
+//       title
+//       url
+//       source
+//       published_at
+//       image_url
+//       summary
+//       created_at
+//     }
+//   }
+// `; 

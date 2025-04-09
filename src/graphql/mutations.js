@@ -29,27 +29,33 @@ export const UPDATE_USER_PREFERENCES = gql`
   }
 `;
 export const ADD_BOOKMARK = gql`
-  mutation AddBookmark($articleId: uuid!, $userId: uuid!) {
-    insert_bookmarks(
-      objects: {
-        article_id: $articleId
-        user_id: $userId
-      }
-    ) {
-      returning {
-        id
-        created_at
-        article {
-          id
-          title
-          summary
-          url
-          source
-          published_at
-          sentiment_label
-          image_url
-        }
-      }
+  mutation AddBookmark(
+    $userId: uuid!,
+    $title: String!,
+    $url: String!,
+    $source: String!,
+    $published_at: timestamptz!,
+    $image_url: String,
+    $summary: String,
+    $sentiment_label: String
+  ) {
+    insert_bookmarks_one(object: {
+      user_id: $userId,
+      title: $title,
+      url: $url,
+      source: $source,
+      published_at: $published_at,
+      image_url: $image_url,
+      summary: $summary,
+      sentiment_label: $sentiment_label
+    }) {
+      id
+      title
+      url
+      source
+      published_at
+      image_url
+      summary
     }
   }
 `;

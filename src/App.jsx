@@ -8,12 +8,13 @@ import SignupPage from './pages/SignupPage';
 // import Dashboard from './pages/dashboard';
 import DashboardPage from './pages/DashboardPage';
 import Todos from './pages/todo';
+import { Toaster } from 'sonner';
 // import AppRoutes from './routes';
 
 // Initialize Nhost client
 const nhost = new NhostClient({
-  subdomain: "fglrgnpgtyzshqcnrjke",
-  region: "ap-south-1"
+  subdomain: import.meta.env.VITE_NHOST_SUBDOMAIN,
+  region: import.meta.env.VITE_NHOST_REGION,
 });
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
             <Route path="/" element={<Navigate to="/dashboard" />} />
             {/* <Route path="*" element={} /> */}
           </Routes>
+          <Toaster position="top-right" richColors closeButton />
         </Router>
       </NhostApolloProvider>
     </NhostProvider>
