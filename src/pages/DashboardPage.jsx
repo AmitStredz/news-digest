@@ -121,6 +121,7 @@ const DashboardPage = () => {
 
   // Process news articles with AI
   const processNewsWithAI = async (articles) => {
+    console.log("articles", articles);
     setLoadingStage(LoadingStages.ANALYZING);
     try {
       // Limit to 6 articles for AI processing
@@ -157,7 +158,7 @@ const DashboardPage = () => {
             url: article.url,
             source: article.source.name,
             published_at: article.publishedAt,
-            image_url: article.urlToImage,
+            image_url: article.image,
             ai_analysis: aiAnalysis,
           };
         })
@@ -196,8 +197,8 @@ const DashboardPage = () => {
       }
       if (preferences.keywords?.length > 0) {
         queryString = queryString
-          ? `${queryString}, ${preferences.keywords.join(", ")}`
-          : preferences.keywords.join(",");
+          ? `${queryString} ${preferences.keywords.join(" ")}`
+          : preferences.keywords.join(" ");
       }
       if (!queryString) {
         queryString = "technology"; // Default fallback
@@ -206,16 +207,17 @@ const DashboardPage = () => {
       // Fetch news based on preferences
       const response = await axios.get(NEWS_API_BASE_URL, {
         params: {
-          q: queryString,
-          language: "en",
-          apiKey: API_KEY,
+          q: queryString,           // Same parameter name
+          lang: "en",               // Changed from "language"
+          apikey: API_KEY,          // Changed from "apiKey"
           page: currentPage,
-          pageSize: ARTICLES_PER_PAGE,
+          max: ARTICLES_PER_PAGE    // Changed from "pageSize"
         },
       });
-
-      if (response.data.status === "ok") {
+      console.log("response.data", response);
+      if (response.data) {
         setTotalResults(response.data.totalResults);
+        console.log("response.data.articles", response.data.articles);
         const processedArticles = await processNewsWithAI(
           response.data.articles
         );
