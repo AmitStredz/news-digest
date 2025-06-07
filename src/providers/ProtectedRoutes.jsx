@@ -1,23 +1,23 @@
-import { useAuthenticationStatus } from "@nhost/react";
-import { Spinner } from "react-bootstrap";
-import { Navigate } from "react-router-dom";
+// import { useAuthenticationStatus } from "@nhost/react";
+// import { Spinner } from "react-bootstrap";
+// import { Navigate } from "react-router-dom";
 
-const ProtectedRoute = ({ children }) => {
-  const { isAuthenticated, isLoading } = useAuthenticationStatus();
+// const ProtectedRoute = ({ children }) => {
+//   const { isAuthenticated, isLoading } = useAuthenticationStatus();
 
-  if (isLoading) {
-    return (
-      <div>
-        <Spinner/>
-      </div>
-    );
-  }
+//   if (isLoading) {
+//     return (
+//       <div>
+//         <Spinner/>
+//       </div>
+//     );
+//   }
 
-  if (!isAuthenticated) {
-    return <Navigate to="/login" />;
-  }
+//   if (!isAuthenticated) {
+//     return <Navigate to="/login" />;
+//   }
 
-  return children;
-};
+//   return children;
+// };
 
-export default ProtectedRoute;
+// export default ProtectedRoute;

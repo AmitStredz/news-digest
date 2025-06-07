@@ -25,13 +25,13 @@ function App() {
           <Routes>
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
-            <Route
+            {/* <Route
               path="/dashboard"
               element={
                 <ProtectedRoute>
                   <DashboardPage />
                 </ProtectedRoute>
-              }
+              } */}
             />
             <Route path="/" element={<Navigate to="/dashboard" />} />
             {/* <Route path="*" element={} /> */}
